@@ -1,6 +1,6 @@
 ### URLs
 
-[Netlify](https://bn-ToDo.netlify.app/)
+[Netlify](https://bn-todo.netlify.app/)
 
 <hr>
 
