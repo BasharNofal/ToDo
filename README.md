@@ -1,6 +1,5 @@
 ### URLs
 
-[Pull Request](https://github.com/BasharNofal/ToDo/pull/1)\
 [Netlify](https://bn-ToDo.netlify.app/)
 
 <hr>
