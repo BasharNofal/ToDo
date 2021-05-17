@@ -9,7 +9,8 @@ function ToDoList(props) {
           className={`complete-${item.complete.toString()}`}
           key={item._id}>
           <span onClick={() => props.handleComplete(item._id)}>
-            {item.text}
+            {item.text }
+            <p style={{textAlign:'right', margin:0}} >{`Assigned to: ${item.assignee}`}</p>
           </span>
           <button onClick={() => props.handleDelete(item._id)}>Delete</button>
           <button onClick={() => props.handleUpdate(item._id)}>Edit</button>
