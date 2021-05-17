@@ -1,12 +1,14 @@
 ### URLs
 
+
+[Pull Request](https://github.com/BasharNofal/Todo/pull/2)\
 [Netlify](https://bn-todo.netlify.app/)
 
 <hr>
 
 ### UML Diagram
 
-![UML](./assets/ToDo-ph1.png)
+![UML](./assets/ToDo-ph2.png)
 
 <hr>
 

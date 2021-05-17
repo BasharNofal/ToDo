@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import TodoForm from './form.js';
 import TodoList from './list.js';
-
 import './todo.scss';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
-
 
 const ToDo = () => {
 
@@ -13,16 +12,13 @@ const ToDo = () => {
 
   const _addItem = (item) => {
     item.due = new Date();
-    fetch(todoAPI, {
-      method: 'post',
+    axios.post(todoAPI, item, {
       mode: 'cors',
       cache: 'no-cache',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(item)
     })
-      .then(response => response.json())
-      .then(savedItem => {
-        setList([...list, savedItem])
+      .then(response => {
+        setList([...list, response.data])
       })
       .catch(console.error);
   };
@@ -37,53 +33,60 @@ const ToDo = () => {
 
       let url = `${todoAPI}/${id}`;
 
-      fetch(url, {
-        method: 'put',
+      axios.put(url, item, {
         mode: 'cors',
         cache: 'no-cache',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(item)
       })
-        .then(response => response.json())
-        .then(savedItem => {
-          setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
+        .then(response => {
+          setList(list.map(listItem => listItem._id === item._id ? response.data : listItem));
         })
         .catch(console.error);
     }
   };
 
   const _getTodoItems = () => {
-    fetch(todoAPI, {
-      method: 'get',
-      mode: 'cors',
-    })
-      .then(data => data.json())
-      .then(data => setList(data.results))
+    axios.get(todoAPI, { mode: 'cors' })
+      .then(data => setList(data.data.results))
       .catch(console.error);
   };
 
+  const _deleteItem = id => {
+    let item = list.filter(item => item._id === id)[0] || {};
+    if (item._id) {
+      let newList = list.filter(items => items !== item);
+      setList(newList);
+    }
+    let url = `${todoAPI}/${id}`;
+
+    axios.delete(url, { mode: 'cors' }).then(() => {
+      console.log('deleted');
+    }).catch(error => {
+      console.error(error)
+    });
+  }
+
   useEffect(_getTodoItems, []);
+  useEffect(_getTodoItems, [list]);
 
   return (
     <>
-      <header>
+      <div id="counterDiv">
         <h2>
           There are {list.filter(item => !item.complete).length} Items To Complete
         </h2>
-      </header>
+      </div>
 
       <section className="todo">
-
-        <div>
-          <TodoForm handleSubmit={_addItem} />
-        </div>
-
-        <div>
-          <TodoList
-            list={list}
-            handleComplete={_toggleComplete}
-          />
-        </div>
+            <div>
+              <TodoForm handleSubmit={_addItem} />
+            </div>
+            <div>
+              <TodoList
+                list={list}
+                handleComplete={_toggleComplete} handleDelete={_deleteItem}
+              />
+            </div>
       </section>
     </>
   );

@@ -13,7 +13,6 @@ function ToDoForm(props) {
   }
 
   const handleSubmit = event => {
-    console.log(1)
     event.preventDefault();
     event.target.reset();
     props.handleSubmit(item);
@@ -28,15 +27,15 @@ function ToDoForm(props) {
         <FormGroup>
           <FormLabel>
             To Do Item
-          <FormControl name="text" placeholder="Item Details" onChange={handleInputChange} />
+          <FormControl name="text" type="text" placeholder="Item Details" onChange={handleInputChange} />
           </FormLabel>
           <FormLabel>
             Difficulty Rating
-            <FormControl type="range" defaultValue="1" min="1" max="5" name="difficulty" onChange={handleInputChange} />
+            <FormControl name="difficulty" type="range" defaultValue="1" min="1" max="5" onChange={handleInputChange} />
           </FormLabel>
           <FormLabel>
             Assigned To
-            <FormControl type="text" placeholder="Assigned Name" />
+            <FormControl name="assignee" type="text" placeholder="Assigned Name" onChange={handleInputChange} />
           </FormLabel>
         </FormGroup>
         <Button type="submit" variant="primary" >
