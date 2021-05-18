@@ -29,7 +29,7 @@ body, html {
     display:flex;
     flex-direction:row;
     justify-content: flex-start;
-    margin: 2em;
+    margin: 2em 17%;
 
     form {
 
@@ -57,14 +57,11 @@ body, html {
 
     ul {
         list-style-type:none;
-        margin:1em 1em;
+        // margin:1em 1em;
         padding:0;
 
         li {
             width: 30rem;
-            // align-items: center;
-            // display:flex;
-            // flex-direction:row;
             font-size: .85em;
             margin: 1em .5em;
 
@@ -123,7 +120,6 @@ body, html {
 }
 
 #counterDiv{
-    // text-align: center;
     margin: 2em;
     width: 95%;
     background-color: grey;
@@ -161,5 +157,25 @@ body, html {
     }
     span {
         text-align: center;
+    }
+}
+
+#pages{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+
+    .pagination{
+        text-align: center;
+        li {
+            text-align: center;
+        }
+    }
+
+    .page-item {
+        width: 1rem;
+        &:hover{
+            cursor: pointer;
+        }
     }
 }
