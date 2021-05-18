@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import TodoForm from './form.js';
 import TodoList from './list.js';
+// import PaginationEditor from './pagination'
 import './todo.scss';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
-
 const ToDo = () => {
-
+  
   const [list, setList] = useState([]);
 
   const _addItem = (item) => {
@@ -67,7 +67,6 @@ const ToDo = () => {
   }
 
   useEffect(_getTodoItems, []);
-  useEffect(_getTodoItems, [list]);
 
   return (
     <>
@@ -78,15 +77,17 @@ const ToDo = () => {
       </div>
 
       <section className="todo">
-            <div>
-              <TodoForm handleSubmit={_addItem} />
-            </div>
-            <div>
-              <TodoList
-                list={list}
-                handleComplete={_toggleComplete} handleDelete={_deleteItem}
-              />
-            </div>
+        <div>
+          <TodoForm handleSubmit={_addItem} />
+        </div>
+        <div>
+          <TodoList
+            list={list}
+            handleComplete={_toggleComplete}
+            handleDelete={_deleteItem}
+            handleList={setList}
+            getAllItems={_getTodoItems} />
+        </div>
       </section>
     </>
   );
