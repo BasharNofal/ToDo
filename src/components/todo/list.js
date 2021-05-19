@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import Acl from './acl';
+import SortList from './sort';
 import Toast from 'react-bootstrap/Toast';
 import ToastHeader from 'react-bootstrap/ToastHeader';
 import ToastBody from 'react-bootstrap/ToastBody';
-import { useContext } from 'react';
 import { Sort } from '../../context/sort';
 import { Pagination } from '../../context/pagination';
-import PaginationEditor from './pagination'
-import SortList from './sort';
-import Button from 'react-bootstrap/Button'
+import PaginationEditor from './pagination';
+import Button from 'react-bootstrap/Button';
 
 function ToDoList(props) {
   const paginationContext = useContext(Pagination);
@@ -26,7 +26,9 @@ function ToDoList(props) {
 
   const sort = () => {
     if (sortContext.sortKey === 'Difficulty') {
+      console.log(sortContext.sortKey);
       props.handleList(props.list.sort((a, b) => a.difficulty - b.difficulty));
+      // console.log(props.handleList(props.list.sort((a, b) => a.difficulty - b.difficulty)));
     } else{
       props.getAllItems()
     }
@@ -37,11 +39,11 @@ function ToDoList(props) {
 
   return (
     <>
-      <div>
+      <div className="filter_sort">
         <Button onClick={filter} variant="primary">Show Pending</Button>
         <SortList list={arrOfCurrentPosts} />
       </div>
-      <div>
+      <div className="cards-div">
         <ul>
           {arrOfCurrentPosts.map(item => (
             <li className={`complete-${item.complete.toString()}`}
@@ -50,7 +52,9 @@ function ToDoList(props) {
                 <ToastHeader>
                   <span className={`rounded mr-2 mySpan`} onClick={() => props.handleComplete(item._id)} >{item.complete ? "Complete" : "Pending"}</span>
                   <span className="mr-auto" ><b>{item.assignee}</b></span>
-                  <b className="closeBtn" onClick={() => props.handleDelete(item._id)}>X</b>
+                  <Acl capability="delete">
+                    <b className="closeBtn" onClick={() => props.handleDelete(item._id)}>X</b>
+                  </Acl>
                 </ToastHeader>
                 <ToastBody>
                   <p> <b>{item.text}</b> </p>

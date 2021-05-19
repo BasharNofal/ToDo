@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import FormLabel from 'react-bootstrap/FormLabel'
-import FormGroup from 'react-bootstrap/FormGroup'
+import FormLabel from 'react-bootstrap/FormLabel';
+import FormGroup from 'react-bootstrap/FormGroup';
 import Button from 'react-bootstrap/Button';
 
 function ToDoForm(props) {
@@ -21,7 +21,6 @@ function ToDoForm(props) {
 
   return (
     <>
-    <div className="formsDiv">
       <h3>Add To Do Item</h3>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
@@ -42,7 +41,6 @@ function ToDoForm(props) {
           Submit
         </Button>
       </Form>
-    </div>
     </>
   );
 

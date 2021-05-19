@@ -5,7 +5,6 @@ import { Sort } from '../../context/sort';
 
 const SortList = (props) => {
     const context = useContext(Sort);
-    // console.log({context});
     const sortMethodAll = () => {
         context.setSortKey('All');
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TodoForm from './form.js';
 import TodoList from './list.js';
-// import PaginationEditor from './pagination'
+import Acl from './acl';
 import './todo.scss';
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
@@ -75,12 +75,13 @@ const ToDo = () => {
           There are {list.filter(item => !item.complete).length} Items To Complete
         </h2>
       </div>
-
       <section className="todo">
-        <div>
-          <TodoForm handleSubmit={_addItem} />
-        </div>
-        <div>
+        <Acl capability="create">
+          <div className="formsDiv">
+            <TodoForm handleSubmit={_addItem} />
+          </div>
+        </Acl>
+        <div className="cardsDiv">
           <TodoList
             list={list}
             handleComplete={_toggleComplete}
