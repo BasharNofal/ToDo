@@ -4,9 +4,15 @@ This app is basically to-do list manager, you can add, delete, and update items,
 
 You can sort the list by difficulty, also you can filter them by showing only the pending items.
 
+Before adding, deleting, or updating items, you have to login in, if you login as user you would only be able to view the list, if you login as editor, you would be able to add and update items, and finally if login as  an admin you would be able to add, update, and delete items.
+
+* **Login as User:** username:*user*, password:*USER*.
+* **Login as Editor:** username:*editor*, password:*Editor*.
+* **Login as Admin:** username:*admin*, password:*ADMIN*.
+
 ### URLs
 
-[Pull Request](https://github.com/BasharNofal/Todo/pull/3)\
+[Pull Request](https://github.com/BasharNofal/Todo/pull/5)\
 [Netlify](https://bn-todo.netlify.app/)
 
 <hr>
