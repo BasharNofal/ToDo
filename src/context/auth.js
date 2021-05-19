@@ -12,7 +12,8 @@ function AuthProvider(props) {
     const [user, setUser] = useState({});
     const state = { loggedIn, setLogin, setLoggedIn, login, user };
 
-    function login (isLoggedIn, token, user) {
+
+    function login(isLoggedIn, token, user) {
         cookie.save('auth', token);
         setLoggedIn(isLoggedIn);
         setUser(user);
@@ -20,7 +21,7 @@ function AuthProvider(props) {
 
     const validateToken = (token) => {
         try {
-            const user = jwt.verify(token,'supersecret')
+            const user = jwt.verify(token, 'supersecret')
             login(true, token, user);
         } catch (error) {
             login(false, null, {});
@@ -28,19 +29,21 @@ function AuthProvider(props) {
         }
     }
 
-    async function setLogin (username, password) {
+    async function setLogin(username, password) {
         try {
-            const response = await superagent.post(`${api}/signin`).set('authorization',`Basic ${btoa(`${username}:${password}`)}`);
+            const response = await superagent.post(`${api}/signin`).set('authorization', `Basic ${btoa(`${username}:${password}`)}`);
             validateToken(response.body.token);
         } catch (error) {
             console.error('Login error', error);
         }
     }
 
-    useEffect(() => {
+    const checkCookies = () => {
         const token = cookie.load('auth');
         validateToken(token);
-    }, [])
+    }
+    
+    useEffect(checkCookies,[])
 
     return (
         <AuthContext.Provider value={state}>
